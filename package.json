@@ -1,8 +1,16 @@
 {
+  "name": "@vercel/chat",
+  "version": "0.0.1",
+  "description": "UI helper for VS Code",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "next build",
+    "build": "tsc",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",

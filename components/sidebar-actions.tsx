@@ -43,7 +43,7 @@ export function SidebarActions({
   return (
     <>
       <div className="space-x-1">
-        <Tooltip>
+        {/* <Tooltip>
           <TooltipTrigger asChild>
             <Button
               variant="ghost"
@@ -55,8 +55,8 @@ export function SidebarActions({
             </Button>
           </TooltipTrigger>
           <TooltipContent>Share chat</TooltipContent>
-        </Tooltip>
-        <Tooltip>
+        </Tooltip> */}
+        {/* <Tooltip>
           <TooltipTrigger asChild>
             <Button
               variant="ghost"
@@ -69,7 +69,7 @@ export function SidebarActions({
             </Button>
           </TooltipTrigger>
           <TooltipContent>Delete chat</TooltipContent>
-        </Tooltip>
+        </Tooltip> */}
       </div>
       <ChatShareDialog
         chat={chat}
