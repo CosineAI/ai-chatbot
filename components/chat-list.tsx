@@ -2,12 +2,15 @@ import { type Message } from 'ai'
 
 import { Separator } from '@/components/ui/separator'
 import { ChatMessage } from '@/components/chat-message'
+import { Icon } from '@radix-ui/react-select'
 
 export interface ChatList {
   messages: Message[]
+  userIcon?: React.ReactNode
+  assistantIcon?: React.ReactNode
 }
 
-export function ChatList({ messages }: ChatList) {
+export function ChatList({ messages, userIcon, assistantIcon }: ChatList) {
   if (!messages.length) {
     return null
   }
@@ -16,7 +19,7 @@ export function ChatList({ messages }: ChatList) {
     <div className="relative mx-auto max-w-2xl px-4 w-full">
       {messages.map((message, index) => (
         <div key={index}>
-          <ChatMessage message={message} />
+          <ChatMessage message={message} userIcon={userIcon} assistantIcon={assistantIcon} />
           {index < messages.length - 1 && (
             <Separator className="my-4 md:my-8" />
           )}
