@@ -7,10 +7,11 @@ import { useAtBottom } from '@/lib/hooks/use-at-bottom'
 
 interface ChatScrollAnchorProps {
   trackVisibility?: boolean
+  scrollRef?: React.RefObject<HTMLElement>
 }
 
-export function ChatScrollAnchor({ trackVisibility }: ChatScrollAnchorProps) {
-  const isAtBottom = useAtBottom()
+export function ChatScrollAnchor({ scrollRef, trackVisibility }: ChatScrollAnchorProps) {
+  const isAtBottom = useAtBottom(scrollRef)
   const { ref, entry, inView } = useInView({
     trackVisibility,
     delay: 100,
