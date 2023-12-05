@@ -21,7 +21,9 @@
       "@/*": [
         "*"
       ]
-    }
+    },
+    "declarationMap": true,
+    "declaration": true
   },
   "include": [
     "**/*"
