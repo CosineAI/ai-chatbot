@@ -14,14 +14,11 @@ export interface ButtonScrollToBottomProps extends ButtonProps {
 export function ButtonScrollToBottom({ scrollRef, className, ...props }: ButtonScrollToBottomProps) {
   const isAtBottom = useAtBottom(scrollRef)
   return (
-    <Button
+    <>
+    {!isAtBottom ? <Button
       variant="outline"
       size="icon"
-      className={cn(
-        'bg-background transition-opacity duration-300 sm:right-8 md:top-2',
-        isAtBottom ? 'opacity-0' : 'opacity-100',
-        className
-      )}
+      className={className}
       onClick={() => (scrollRef?.current ?? window).scrollTo({
           top: scrollRef?.current?.offsetHeight ?? document.body.offsetHeight,
           behavior: 'smooth'
@@ -31,6 +28,7 @@ export function ButtonScrollToBottom({ scrollRef, className, ...props }: ButtonS
     >
       <IconArrowDown />
       <span className="sr-only">Scroll to bottom</span>
-    </Button>
+    </Button> : null }
+    </>
   )
 }
