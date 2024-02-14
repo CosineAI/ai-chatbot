@@ -10,7 +10,7 @@ interface SidebarContext {
   isLoading: boolean
 }
 
-const SidebarContext = React.createContext<SidebarContext | undefined>(
+export const SidebarContext = React.createContext<SidebarContext | undefined>(
   undefined
 )
 

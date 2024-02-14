@@ -1,4 +1,3 @@
-import * as React from 'react'
 import Textarea from 'react-textarea-autosize'
 import { UseChatHelpers } from 'ai/react'
 import { useEnterSubmit } from '@/lib/hooks/use-enter-submit'
@@ -9,25 +8,27 @@ import {
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip'
-import { IconArrowElbow, IconPlus } from '@/components/ui/icons'
+import { IconPlus, IconArrowUp, Square, IconStop } from '@/components/ui/icons'
 import { useRouter } from 'next/navigation'
+import { HTMLProps, useEffect, useRef } from 'react'
 
-export interface PromptProps
-  extends Pick<UseChatHelpers, 'input' | 'setInput'> {
+export type PromptProps = Pick<UseChatHelpers, 'input' | 'setInput' | "stop"> & Pick<HTMLProps<HTMLTextAreaElement>, "placeholder"> & {
   onSubmit: (value: string) => void
   isLoading: boolean
 }
 
 export function PromptForm({
+  placeholder,
   onSubmit,
   input,
   setInput,
-  isLoading
+  stop,
+  isLoading,
 }: PromptProps) {
   const { formRef, onKeyDown } = useEnterSubmit()
-  const inputRef = React.useRef<HTMLTextAreaElement>(null)
+  const inputRef = useRef<HTMLTextAreaElement>(null)
   const router = useRouter()
-  React.useEffect(() => {
+  useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus()
     }
@@ -45,7 +46,7 @@ export function PromptForm({
       }}
       ref={formRef}
     >
-      <div className="relative flex flex-col w-full px-8 overflow-hidden max-h-60 grow bg-background sm:rounded-md sm:border sm:px-12">
+      <div className="relative flex flex-col w-full px-2 overflow-hidden max-h-60 grow sm:rounded-md sm:px-3">
         {/* <Tooltip>
           <TooltipTrigger asChild>
             <button
@@ -72,25 +73,37 @@ export function PromptForm({
           rows={1}
           value={input}
           onChange={e => setInput(e.target.value)}
-          placeholder="Send a message."
+          placeholder={placeholder ?? 'Send a message...'}
           spellCheck={false}
           className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
         />
-        {/* <div className="absolute right-0 top-4 sm:right-4">
+        <div className="absolute right-0 top-4 sm:right-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button
-                type="submit"
-                size="icon"
-                disabled={isLoading || input === ''}
-              >
-                <IconArrowElbow />
+              {isLoading ? 
+                <Button
+                  type="button"
+                  size="icon"
+                  variant="ghost"
+                  className='size-8 p-0 rounded-full'
+                  onClick={() => stop()}
+                >
+                  <IconStop className='size-8' />
+                  <span className="sr-only">Stop</span>
+                </Button> 
+              : <Button
+                  type="submit"
+                  size="icon"
+                  className='size-8 p-0'
+                  disabled={input === ''}
+                >
+                <IconArrowUp className='size-5' />
                 <span className="sr-only">Send message</span>
-              </Button>
+              </Button>}
             </TooltipTrigger>
-            <TooltipContent>Send message</TooltipContent>
+            <TooltipContent>{isLoading ? "Stop" : "Send message"}</TooltipContent>
           </Tooltip>
-        </div> */}
+        </div>
       </div>
     </form>
   )
