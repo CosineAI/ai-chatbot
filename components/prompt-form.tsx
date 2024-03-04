@@ -15,6 +15,7 @@ import { HTMLProps, useEffect, useRef } from 'react'
 export type PromptProps = Pick<UseChatHelpers, 'input' | 'setInput' | "stop"> & Pick<HTMLProps<HTMLTextAreaElement>, "placeholder"> & {
   onSubmit: (value: string) => void
   isLoading: boolean
+  disabled?: boolean
 }
 
 export function PromptForm({
@@ -24,6 +25,7 @@ export function PromptForm({
   setInput,
   stop,
   isLoading,
+  disabled,
 }: PromptProps) {
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = useRef<HTMLTextAreaElement>(null)
@@ -68,6 +70,7 @@ export function PromptForm({
         </Tooltip> */}
         <Textarea
           ref={inputRef}
+          disabled={disabled}
           tabIndex={0}
           onKeyDown={onKeyDown}
           rows={1}
@@ -95,7 +98,7 @@ export function PromptForm({
                   type="submit"
                   size="icon"
                   className='size-8 p-0'
-                  disabled={input === ''}
+                  disabled={input === '' || disabled}
                 >
                 <IconArrowUp className='size-5' />
                 <span className="sr-only">Send message</span>
