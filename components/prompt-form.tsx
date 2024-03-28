@@ -1,15 +1,13 @@
 import Textarea from 'react-textarea-autosize'
 import { UseChatHelpers } from 'ai/react'
 import { useEnterSubmit } from '@/lib/hooks/use-enter-submit'
-import { cn } from '@/lib/utils'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip'
-import { IconPlus, IconArrowUp, Square, IconStop } from '@/components/ui/icons'
-import { useRouter } from 'next/navigation'
+import { IconEnter, IconStop } from '@/components/ui/icons'
 import { HTMLProps, useEffect, useRef } from 'react'
 
 export type PromptProps = Pick<UseChatHelpers, 'input' | 'setInput' | "stop"> & Pick<HTMLProps<HTMLTextAreaElement>, "placeholder"> & {
@@ -29,7 +27,6 @@ export function PromptForm({
 }: PromptProps) {
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = useRef<HTMLTextAreaElement>(null)
-  const router = useRouter()
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus()
@@ -44,7 +41,7 @@ export function PromptForm({
           return
         }
         setInput('')
-        await onSubmit(input)
+        onSubmit(input)
       }}
       ref={formRef}
     >
@@ -64,7 +61,7 @@ export function PromptForm({
         <div className="absolute right-0 bottom-3 sm:right-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              {isLoading ? 
+              {isLoading ?
                 <Button
                   type="button"
                   size="icon"
@@ -74,16 +71,16 @@ export function PromptForm({
                 >
                   <IconStop className='size-8' />
                   <span className="sr-only">Stop</span>
-                </Button> 
-              : <Button
+                </Button>
+                : <Button
                   type="submit"
                   size="icon"
-                  className='size-8 p-0'
+                  className='bg-gray-500 size-8 p-0'
                   disabled={input === '' || disabled}
                 >
-                <IconArrowUp className='size-5' />
-                <span className="sr-only">Send message</span>
-              </Button>}
+                  <IconEnter className='size-5' />
+                  <span className="sr-only">Send message</span>
+                </Button>}
             </TooltipTrigger>
             <TooltipContent>{isLoading ? "Stop" : "Send message"}</TooltipContent>
           </Tooltip>

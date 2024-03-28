@@ -172,18 +172,18 @@ function IconArrowDown({ className, ...props }: React.ComponentProps<'svg'>) {
 
 export function IconArrowUp({ className, ...props }: React.ComponentProps<'svg'>) {
   return (
-    <svg 
-      xmlns="http://www.w3.org/2000/svg" 
-      width="24" 
-      height="24" 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="2" 
-      strokeLinecap="round" 
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
       strokeLinejoin="round"
       className={cn('size-4', className)}>
-        <path d="m5 12 7-7 7 7"/><path d="M12 19V5"/>
+      <path d="m5 12 7-7 7 7" /><path d="M12 19V5" />
     </svg>
   );
 }
@@ -199,9 +199,9 @@ export function Square({ className, ...props }: React.ComponentProps<'svg'>) {
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
-      strokeLinejoin="round" 
+      strokeLinejoin="round"
       className={cn('size-4', className)}>
-        <rect width="18" height="18" x="3" y="3" rx="2"/>
+      <rect width="18" height="18" x="3" y="3" rx="2" />
     </svg>)
 }
 
@@ -511,7 +511,30 @@ function IconChevronUpDown({
   )
 }
 
+function IconEnter({ className, ...props }: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={cn('size-4', className)}
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path d="M9 10L4 15 9 20"></path>
+      <path d="M20 4v7a4 4 0 01-4 4H4"></path>
+    </svg>
+  );
+}
+
+
 export {
+  IconEnter,
   IconEdit,
   IconNextChat,
   IconOpenAI,
