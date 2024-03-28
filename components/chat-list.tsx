@@ -6,11 +6,12 @@ import { Icon } from '@radix-ui/react-select'
 
 export interface ChatList {
   messages: Message[]
-  userIcon?: React.ReactNode
+  userIcon?: (message: Message) => React.ReactNode
   assistantIcon?: React.ReactNode
+  actions?: React.ReactNode
 }
 
-export function ChatList({ messages, userIcon, assistantIcon }: ChatList) {
+export function ChatList({ messages, userIcon, assistantIcon, actions }: ChatList) {
   if (!messages.length) {
     return null
   }
@@ -21,7 +22,7 @@ export function ChatList({ messages, userIcon, assistantIcon }: ChatList) {
         const last = index === messages.length - 1
         return (
           <div key={index}>
-            <ChatMessage message={message} userIcon={userIcon} assistantIcon={assistantIcon} />
+            <ChatMessage message={message} userIcon={userIcon?.(message)} assistantIcon={assistantIcon} actions={actions} />
             {!last && (
               <Separator className="my-4 md:my-8" />
             )}
