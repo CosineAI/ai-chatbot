@@ -8,7 +8,7 @@ export interface ChatList {
   messages: Message[]
   userIcon?: (message: Message) => React.ReactNode
   assistantIcon?: React.ReactNode
-  actions?: React.ReactNode
+  actions?: (message: Message) => React.ReactNode
 }
 
 export function ChatList({ messages, userIcon, assistantIcon, actions }: ChatList) {
@@ -23,9 +23,7 @@ export function ChatList({ messages, userIcon, assistantIcon, actions }: ChatLis
         return (
           <div key={index}>
             <ChatMessage message={message} userIcon={userIcon?.(message)} assistantIcon={assistantIcon} actions={actions} />
-            {!last && (
-              <Separator className="my-4 md:my-8" />
-            )}
+            {!last && <Separator className="mb-4 md:mb-8" />}
           </div>
         )
       }

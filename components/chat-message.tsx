@@ -9,14 +9,12 @@ import { cn } from '@/lib/utils'
 import { CodeBlock } from '@/components/ui/codeblock'
 import { MemoizedReactMarkdown } from '@/components/markdown'
 import { IconOpenAI, IconUser } from '@/components/ui/icons'
-import { ChatMessageActions } from '@/components/chat-message-actions'
-import { Badge } from './ui/badge'
 
 export interface ChatMessageProps {
   message: Message
   userIcon?: React.ReactNode;
   assistantIcon?: React.ReactNode;
-  actions?: React.ReactNode;
+  actions?: (message: Message) => React.ReactNode
 }
 
 export function ChatMessage({ message, userIcon, assistantIcon, actions, ...props }: ChatMessageProps) {
@@ -80,9 +78,8 @@ export function ChatMessage({ message, userIcon, assistantIcon, actions, ...prop
           >
             {message.content}
           </MemoizedReactMarkdown>
-          {isAssistant && actions}
+          {actions?.(message)}
         </div>
-        <ChatMessageActions message={message} />
       </div>
     </div>
   )
