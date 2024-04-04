@@ -2,7 +2,6 @@ import { type Message } from 'ai'
 
 import { Separator } from '@/components/ui/separator'
 import { ChatMessage } from '@/components/chat-message'
-import { Icon } from '@radix-ui/react-select'
 
 export interface ChatList {
   messages: Message[]
@@ -27,7 +26,7 @@ export function ChatList({ messages, userIcon, assistantIcon, actions }: ChatLis
           </div>
         )
       }
-    )}
+      )}
     </div>
   )
 }

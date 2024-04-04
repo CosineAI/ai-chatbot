@@ -18,11 +18,10 @@ export interface ChatMessageProps {
 }
 
 export function ChatMessage({ message, userIcon, assistantIcon, actions, ...props }: ChatMessageProps) {
-  const isAssistant = message.role === 'assistant'
 
   return (
     <div
-      className={cn('group relative mb-4 flex items-start md:-ml-12')}
+      className={cn('group relative mb-4 flex items-start')}
       {...props}
     >
       <div
