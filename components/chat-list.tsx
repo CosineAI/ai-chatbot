@@ -1,10 +1,13 @@
-import { type Message } from 'ai'
-
 import { Separator } from '@/components/ui/separator'
-import { ChatMessage } from '@/components/chat-message'
+import { UIState } from '@/lib/chat/actions'
+import { Session } from '@/lib/types'
+import Link from 'next/link'
+import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
 
 export interface ChatList {
-  messages: Message[]
+  messages: UIState
+  session?: Session
+  isShared: boolean
   userIcon?: (message: Message) => React.ReactNode
   assistantIcon?: React.ReactNode
   actions?: (message: Message) => React.ReactNode
